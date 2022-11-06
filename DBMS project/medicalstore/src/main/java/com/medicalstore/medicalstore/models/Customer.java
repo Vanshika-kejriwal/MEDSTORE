@@ -1,5 +1,9 @@
 package com.medicalstore.medicalstore.models;
 
+import java.util.Date;
+
+import org.springframework.format.annotation.DateTimeFormat;
+
 public class Customer {
     private int idcustomer;
     private String username;
@@ -11,6 +15,34 @@ public class Customer {
     private String customer_city;
     private int customer_pincode;
     private String customer_house_no;
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    private Date customer_dob;
+    
+    public Customer(String username, String customer_sex, String customer_ph_no,
+            String customer_aadhar_no, String customer_state, String customer_street, String customer_city,
+            int customer_pincode, String customer_house_no, Date customer_dob) {
+        this.username = username;
+        this.customer_sex = customer_sex;
+        this.customer_ph_no = customer_ph_no;
+        this.customer_aadhar_no = customer_aadhar_no;
+        this.customer_state = customer_state;
+        this.customer_street = customer_street;
+        this.customer_city = customer_city;
+        this.customer_pincode = customer_pincode;
+        this.customer_house_no = customer_house_no;
+        this.customer_dob = customer_dob;
+    }
+
+    public Customer() {
+    }
+
+    public Date getCustomer_dob() {
+        return customer_dob;
+    }
+    public void setCustomer_dob(Date customer_dob) {
+        this.customer_dob = customer_dob;
+    }
+
     public int getIdcustomer() {
         return idcustomer;
     }

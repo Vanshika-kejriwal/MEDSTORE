@@ -39,58 +39,67 @@
              <div class="col-sm-6 offset-sm-3">
               <h3>Customer Registration</h3>
               <hr>
-           
-              <form action="" method="post" novalidate class="shadow p-5">
+              <div th:if="${param.success}">
+                <h3>You successfully registered!!!</h3>
+            </div>
+              <form action="" method="post" class="shadow p-5" th:object="${user}" th:action="@{/registration}">
                 <div class="mb-3">   
                     <label for="name" class="form-label">Name</label>
-                    <input type="text" class="form-control" id="name">
+                    <input type="text" required class="form-control" id="name" th:field="*{Name}">
                 </div>
                 <div class="mb-3">
                     <label for="" class="form-check-label">Gender : </label>
-                    <input type="radio" class="form-check-input" name="sex" id="sex1">
+                    <input type="radio" class="form-check-input" name="sex" id="sex1" th:field="*{gender}" value="Male" required>
                     <label class="form-check-label" for="sex1">Male </label>
-                    <input type="radio" class="form-check-input" name="sex" id="sex2">
+                    <input type="radio" class="form-check-input" name="sex" id="sex2" th:field="*{gender}" value="Female">
                     <label for="" class="form-check-label">Female </label>
-                    <input type="radio" class="form-check-input" name="sex" id="sex3">
+                    <input type="radio" class="form-check-input" name="sex" id="sex3" th:field="*{gender}" value="Not to say">
                     <label for="" class="form-check-label">Prefer not to say</label>
                 </div>
                 <div class="mb-3">
                     <label for="phone_no" class="form-label">Mobile No.</label>
-                    <input type="text" pattern="[0-9]{10}" title="Please enter only 10 digit integers" maxlength="10" class="form-control" id="phone_no">
-                   </div>
+                    <input type="text" th:field="*{mobile_no}" required pattern="[0-9]{10}" title="Please enter only 10 digit integers" maxlength="10" class="form-control" id="phone_no">
+                </div>
                 <div class="mb-3">
                     <label for="aadhar_num" class="form-label">Aadhar No.</label>
-                    <input type="text" class="form-control" id="aadhar_num" maxlength="12" pattern="[0-9]{12}" title="Enter correct 12 digit aadhar no.">
+                    <input type="text" required th:field="*{aadhar_no}" class="form-control" id="aadhar_num" maxlength="12" pattern="[0-9]{12}" title="Enter correct 12 digit aadhar no.">
                     <!-- <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>  -->
                 </div>
                 <div class="mb-3">
                     <label for="dob" class="form-label">Date of Birth : </label>
-                    <input type="date" id="dob">
+                    <input type="date" required th:field="*{dob}" id="dob">
                 </div>
+                <div class="mb-3">
+                  <label for="username" class="form-label">Username</label>
+                  <p th:if="${username_error}" class="text-danger form-label">Username already exists.</p>
+                  <input type="text" required th:field="*{username}" class="form-control" id="username">
+                 </div>
                <div class="mb-3">
-                <label for="inputEmail1" class="form-label">Email</label>
-                <input type="email" class="form-control" id="inputEmail1">
+                 <label for="inputEmail1" class="form-label">Email</label>
+                 <p th:if="${email_error}" class="text-danger form-label">Email already exists.</p>
+                <input type="email" required th:field="*{email}" class="form-control" id="inputEmail1">
                 <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
                </div>
                <div class="mb-3">
                 <label for="inputPassword1" class="form-label">Password</label>
-                <input type="password" class="form-control" id="inputPassword1">
+                <input type="password" required th:field="*{password}" class="form-control" id="inputPassword1">
                </div>
                <div class="mb-3">
-                <label for="inputPassword2" class="form-label">Confirm Password</label>
-                <input type="password" class="form-control" id="inputPassword2">
+                 <label for="inputPassword2" class="form-label">Confirm Password</label>
+                 <p th:if="${password_error}" class="text-danger form-label">Password didn't match.</p>
+                <input type="password" required th:field="*{confirm_password}" class="form-control" id="inputPassword2">
                </div>
                <div class="row mb-4">
                 <div class="col">
                   <div class="form-outline">
                     <label class="form-label" for="house_no">House No.</label>
-                    <input type="text" id="house_no" class="form-control" />
+                    <input type="text" required id="house_no" th:field="*{house_no}" class="form-control" />
                   </div>
                 </div>
                 <div class="col">
                   <div class="form-outline">
                     <label class="form-label" for="street">Street</label>
-                    <input type="text" id="street" class="form-control" />
+                    <input type="text" required id="street" th:field="*{street}" class="form-control" />
                   </div>
                 </div>
               </div>
@@ -98,19 +107,19 @@
                 <div class="col">
                   <div class="form-outline">
                     <label class="form-label" for="city">City</label>
-                    <input type="text" id="city" class="form-control" />
+                    <input type="text" required id="city" th:field="*{city}" class="form-control" />
                   </div>
                 </div>
                 <div class="col">
                   <div class="form-outline">
                     <label class="form-label" for="pincode">Pincode</label>
-                    <input type="text" pattern="[0-9]{6}" maxlength="6" id="pincode" class="form-control" />
+                    <input type="text" required pattern="[0-9]{6}" th:field="*{pincode}" maxlength="6" id="pincode" class="form-control" />
                   </div>
                 </div>
               </div>
               <div class="mb-3">
                 <label for="state" class="form-label">State</label>
-                <input type="text" class="form-control" id="state">
+                <input type="text" required class="form-control" th:field="*{state}" id="state">
                </div>
                <div class="text-end">
                 <button type="submit" class="btn btn-danger">Submit</button>

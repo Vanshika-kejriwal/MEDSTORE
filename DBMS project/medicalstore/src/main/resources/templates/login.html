@@ -41,8 +41,14 @@
           <h3>Login</h3>
           <hr>
           <form th:action="@{/login}" method="post" class="shadow p-5">
+            <div th:if="${param.error}" class="alert alert-error">
+              <h5 class="text-danger">Invalid username or password</h5>
+            </div>
+            <div th:if="${param.logout}" class="alert alert-success">
+              <h4>You have been logged out.</h4>
+            </div>
             <div class="mb-3">
-              <label for="InputEmail1" class="form-label">Email</label>
+              <label for="InputEmail1" class="form-label">Username</label>
               <input type="text" class="form-control" id="InputEmail1" aria-describedby="emailHelp" name="username">
             </div>
             <div class="mb-3">
@@ -54,7 +60,7 @@
           <small><a th:href="@{/forgotpassword/}" class="text-dark">Forgot Password ?</a></small> <br>
           
           <br>
-          <div class="text-center text-dark fw-bold"><small>New to MedStore ? <a th:href="@{/signup/}"
+          <div class="text-center text-dark fw-bold"><small>New to MedStore ? <a th:href="@{/registration/}"
                 class="text-dark ">Create an Account</a> </small></div>
         </div>
       </div>

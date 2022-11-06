@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registration</title>
+</head>
+<body>
+    <div th:if="${param.success}">
+        <h3>You successfully registered!!!</h3>
+    </div>
+    <h1>Customer Registration</h1>
+    <form th:action="@{/registration}" method="post" th:object="${user}">
+        <label for="username"><h5>Username</h5></label>
+        <input type="text" id="username" th:field="*{username}" required autofocus="autofocus">
+        <label for="password"><h5>Password</h5></label>
+        <input type="password" id="password" th:field="*{password}" required autofocus="autofocus">
+        <button type="submit">Register</button>
+        <a th:href="@{/Login}">Log in</a>
+    </form>
+</body>
+</html>

@@ -5,17 +5,30 @@ import org.springframework.data.annotation.Id;
 
 public class users {
     @Id
-    private int user_id;
     private String username;
+    private int user_id;
+    private String email;
     private String password;
     private String role;
     private int enabled;
-
+    
+    public users(String username, int user_id, String email, String password, String role, int enabled) {
+        this.username = username;
+        this.user_id = user_id;
+        this.email = email;
+        this.password = password;
+        this.role = role;
+        this.enabled = enabled;
+    }
+    
     public int getUser_id(){
         return user_id;
     }
     public void setUser_id(int user_id){
         this.user_id = user_id;
+    }
+
+    public users() {
     }
 
     public String getUsername(){
@@ -25,7 +38,7 @@ public class users {
         this.username = username;
     }
 
-    public String getPasString(){
+    public String getPassword(){
         return password;
     }
     public void setPassword(String password){
@@ -44,6 +57,12 @@ public class users {
     }
     public void setEnabled(int enabled){
         this.enabled = enabled;
+    }
+    public String getEmail() {
+        return email;
+    }
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     

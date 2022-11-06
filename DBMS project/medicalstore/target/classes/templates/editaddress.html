@@ -60,22 +60,22 @@
               <h3>Edit Your Address</h3>
               <hr>
            
-              <form action="" method="post" novalidate class="shadow p-5">
+              <form th:action="@{/profile/editaddress}" th:object="${address}" method="post" novalidate class="shadow p-5">
                 <div class="mb-3">
                     <label for="phone_no" class="form-label">Mobile No.</label>
-                    <input type="text" pattern="[0-9]{10}" title="Please enter only 10 digit integers" maxlength="10" class="form-control" id="phone_no">
+                    <input th:field="*{mobile_no}" type="text" pattern="[0-9]{10}" title="Please enter only 10 digit integers" maxlength="10" class="form-control" id="phone_no">
                 </div>
                <div class="row mb-4">
                 <div class="col">
                   <div class="form-outline">
                     <label class="form-label" for="house_no">House No.</label>
-                    <input type="text" id="house_no" class="form-control" />
+                    <input th:field="*{house_no}" type="text" id="house_no" class="form-control" />
                   </div>
                 </div>
                 <div class="col">
                   <div class="form-outline">
                     <label class="form-label" for="street">Street</label>
-                    <input type="text" id="street" class="form-control" />
+                    <input th:field="*{street}" type="text" id="street" class="form-control" />
                   </div>
                 </div>
               </div>
@@ -83,19 +83,19 @@
                 <div class="col">
                   <div class="form-outline">
                     <label class="form-label" for="city">City</label>
-                    <input type="text" id="city" class="form-control" />
+                    <input th:field="*{city}" type="text" id="city" class="form-control" />
                   </div>
                 </div>
                 <div class="col">
                   <div class="form-outline">
                     <label class="form-label" for="pincode">Pincode</label>
-                    <input type="text" pattern="[0-9]{6}" maxlength="6" id="pincode" class="form-control" />
+                    <input th:field="*{pincode}" type="text" pattern="[0-9]{6}" maxlength="6" id="pincode" class="form-control" />
                   </div>
                 </div>
               </div>
               <div class="mb-3">
                 <label for="state" class="form-label">State</label>
-                <input type="text" class="form-control" id="state">
+                <input th:field="*{state}" type="text" class="form-control" id="state">
                </div>
                <div class="text-end">
                 <button type="submit" class="btn btn-danger">Submit</button>

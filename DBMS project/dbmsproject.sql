@@ -3,8 +3,7 @@ create database MedicalStore;
 use MedicalStore;
 
 CREATE TABLE `MedicalStore`.`customer` (
-  `idcustomer` INT NOT NULL,
-  `username` VARCHAR(45) NULL,
+  `idcustomer` INT NOT NULL auto_increment,
   `customer_name` VARCHAR(45) NULL,
   `customer_sex` VARCHAR(6) NOT NULL,
   `customer_phn_no` VARCHAR(12) NOT NULL,
@@ -14,30 +13,40 @@ CREATE TABLE `MedicalStore`.`customer` (
   `customer_city` VARCHAR(45) NOT NULL,
   `customer_pincode` INT(6) NOT NULL,
   `customer_house_no` VARCHAR(45) NOT NULL,
+  `customer_dob` date not null,
   PRIMARY KEY (`idcustomer`),
-  UNIQUE INDEX `username_UNIQUE` (`username` ASC) VISIBLE,
   UNIQUE INDEX `c_aadhar_no_UNIQUE` (`customer_aadhar_no` ASC) VISIBLE); 
 
 
-insert into customer values(1,'Amit','amit','Male','1234567890','012345678912','Rajasthan','civil marg','Ajmer','302001','12');
-insert into customer values(2,'Narendra','narendra','Male','0987654321','231345678912','Uttar Pradesh','civil line','Agra','123456','14');
-insert into customer values(3,'Himanshu','himanshu','Male','9034567890','012345670912','Delhi','guru nagar','Delhi','302121','35');
-insert into customer values(4,'Sumit','sumit','Male','9834567890','352345678912','Rajasthan','Ghan bagh','Nagaur','309001','13');
-insert into customer values(5,'Ashrita','ashrita','Female','9999567890','999945678912','Gujarat','Aham','Ahamdabad','452001','02');
-insert into customer values(6,'Vanshika','vanshika','Female','9965567890','999875678912','Gujarat','Anand','Ahamdabad','452001','02');
-insert into customer values(7,'Amrita','amrita','Female','9993467890','999941278912','Gujarat','Anand','Gandhinagar','452301','02');
+insert into customer values(1,'Amit','Male','1234567890','012345678912','Rajasthan','civil marg','Ajmer','302001','12','2002-02-25');
+insert into customer values(2,'Narendra','Male','0987654321','231345678912','Uttar Pradesh','civil line','Agra','123456','14','2002-02-25');
+insert into customer values(3,'Himanshu','Male','9034567890','012345670912','Delhi','guru nagar','Delhi','302121','35','2002-02-25');
+insert into customer values(4,'Sumit','Male','9834567890','352345678912','Rajasthan','Ghan bagh','Nagaur','309001','13','2002-02-25');
+insert into customer values(5,'Ashrita','Female','9999567890','999945678912','Gujarat','Aham','Ahamdabad','452001','02','2002-02-25');
+insert into customer values(6,'Vanshika','Female','9965567890','999875678912','Gujarat','Anand','Ahamdabad','452001','02','2002-02-25');
+insert into customer values(7,'Amrita','Female','9993467890','999941278912','Gujarat','Anand','Gandhinagar','452301','02','2002-02-25');
 
 -- select * from customer;
 
 -- creating user table
 
 CREATE TABLE `MedicalStore`.`users`(
-	`user_id` INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
-    `username` VARCHAR(40) NOT NULL ,
+	`user_id` INT NOT NULL,
+    `username` VARCHAR(40) PRIMARY KEY NOT NULL ,
     `password` VARCHAR(64) NOT NULL ,
     `role` VARCHAR(45) NOT NULL ,
-    `enabled` TINYINT
-) ;
+    `enabled` TINYINT,
+    `email` VARCHAR(45) unique not null,
+     UNIQUE INDEX `username_UNIQUE` (`username` ASC) VISIBLE,
+    CONSTRAINT `user_id`
+ 		FOREIGN KEY (`user_id`)
+		REFERENCES `MedicalStore`.`customer` (`idcustomer`)
+ 		ON DELETE CASCADE
+ 		ON UPDATE CASCADE-- 
+);
+
+insert into users values (1,'amit','1234','ROLE_USER',1,'amitc9405@gmail.com');
+insert into users values (2,'narendra','1234','ROLE_USER',1,'nkumar@gmail.com');
 
 select * from medicalstore.users;
 
@@ -352,5 +361,4 @@ insert into MedicalStore.transaction_history values(6,'UPI',1000,'2022-11-01',5)
 
 
 -- select * from transaction_history;
-
 
